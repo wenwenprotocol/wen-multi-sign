@@ -1,0 +1,28 @@
+{
+  "name": "wen-multi-sign",
+  "version": "1.0.0",
+  "description": "## Deployer",
+  "main": "index.js",
+  "scripts": {
+      "get": "node get-address",
+      "multi-sign": "node run --network mainnet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenwenprotocol/wen-multi-sign.git"
+  },
+  "keywords": [
+    "wen"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@starcoin/starcoin": "^1.8.0",
+    "dotenv": "^10.0.0",
+    "minimist": "^1.2.5"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "request": "^2.88.2"
+  }
+}
