@@ -39,7 +39,8 @@ async function run() {
     if (enough) {
         const before_b = await balanceOf(sender);
         const signedUserTransactionHex = readHexFromFile(newFilename);
-        const txnInfo = await sendTransaction(signedUserTransactionHex);
+        const txn = await provider.sendTransaction(signedUserTransactionHex);
+        const txnInfo = await txn.wait(1);
         const after_b = await balanceOf(sender);
         await sendToDiscord(
             `👍 Success ${txnInfo.status}`,
@@ -55,6 +56,10 @@ async function run() {
     console.timeEnd(timed);
 
     await sendToDiscord(`Done ${network} multi-sign job.`);
+
+    if (network == "development") {
+        provider.destroy();
+    };
 };
 
 run()
