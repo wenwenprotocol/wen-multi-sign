@@ -1,3 +1,4 @@
+const inquirer = require('inquirer');
 const Config = require('./src/config');
 const {
     Args,
@@ -11,13 +12,33 @@ const {
     readHexFromFile,
     getMultiAccount,
 } = require('./src/multi-sign');
+const {
+    printTxn,
+} = require('./src/printer');
 
 
 async function run() {
     const txnFile = Args[0];
     const config = Config.networks[network];
-    console.log(config, network)
     const provider = config.provider();
+
+    await printTxn(provider, txnFile);
+    try {
+        const answers = await inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'isConfirmRun',
+                message: 'Can this be submitted ?',
+                default: false,
+            }
+        ]);
+        if (!answers.isConfirmRun) {
+            console.log('Cancelling ...');
+            return;
+        };
+    } catch (error) {
+        console.log('❌ inquirer got some error.');
+    };
 
     const balanceOf = async (address, tokenType='0x1::STC::STC') => {
         let balance = await provider.getBalance(address, tokenType);

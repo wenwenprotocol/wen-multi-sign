@@ -4,8 +4,8 @@
   "description": "## Deployer",
   "main": "index.js",
   "scripts": {
-      "get": "node get-address",
-      "multi-sign": "node run --network mainnet"
+    "get": "node get-address",
+    "multi-sign": "node run --network mainnet"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "discord.js": "^13.6.0",
+    "inquirer": "^8.2.4",
     "request": "^2.88.2"
   }
 }
